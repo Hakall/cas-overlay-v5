@@ -5,11 +5,11 @@ Generic CAS maven war overlay to exercise the latest versions of CAS. This overl
 
 # Versions
 ```xml
-<cas.version>4.2.2</cas.version>
+<cas.version>5.0.0</cas.version>
 ```
 
 # Requirements
-* JDK 1.7+
+* JDK 1.8+
 
 # Configuration
 
@@ -34,13 +34,14 @@ mvnw.bat clean package
 
 # Deployment
 
-## Embedded Jetty
+## Embedded Tomcat
 
-* Create a Java keystore at `/etc/cas/jetty/thekeystore` with the password `changeit`.
-* Import your CAS server certificate inside this keystore.
+* Create a keystore file `thekeystore` under /etc/cas. Use the password `changeit` for both the keystore and the key/certificate entries.
+* Ensure the keystore is loaded up with keys and certificates of the server.
 
+Then, run:
 ```bash
-mvnw jetty:run-forked
+java -jar target/cas.war
 ```
 
 CAS will be available at:
