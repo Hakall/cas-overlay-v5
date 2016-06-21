@@ -24,5 +24,9 @@
     "@class" : "org.apereo.cas.services.DefaultRegisteredServiceAccessStrategy",
     "enabled" : true,
     "ssoEnabled" : true
+  },
+  "multifactorPolicy" : {
+    "@class" : "org.apereo.cas.services.DefaultRegisteredServiceMultifactorPolicy",
+    "multifactorAuthenticationProviders" : [ "java.util.LinkedHashSet", [ "mfa-esupotp" ] ]
   }
 }
