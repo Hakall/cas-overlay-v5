@@ -1,4 +1,4 @@
-package org.esupportail.cas.adaptators.esupotp;
+package org.esupportail.cas.adaptors.esupotp;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
