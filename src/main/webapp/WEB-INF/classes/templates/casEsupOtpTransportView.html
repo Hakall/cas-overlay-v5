@@ -9,7 +9,13 @@
 <div layout:fragment="content">
     <div class="box fl-panel" id="login">
         <form method="post" id="fm1" class="fm-v clearfix">
+        
             <p th:utext="${uid}"></p>
+            <p th:utext="${userHash}"></p>
+            <p th:utext="${usersSecret}"></p>
+            <p th:utext="${urlApi}"></p>
+            <p th:utext="${apiPassword}"></p>
+
             <div class="row fl-controls-left">
                 <button onclick="submit();">Sms</button>
                 <input type="hidden" name="_eventId" value="submit"/>
