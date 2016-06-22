@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class EsupOtpCredential implements Credential, Serializable {
     private static final long serialVersionUID = -7570600701132111037L;
 
-    private Integer token;
+    private String token;
 
     /**
      * Instantiates a new Esup otp token credential.
@@ -29,7 +29,7 @@ public class EsupOtpCredential implements Credential, Serializable {
      *
      * @param token the token
      */
-    public EsupOtpCredential(final Integer token) {
+    public EsupOtpCredential(final String token) {
         this.token = token;
     }
 
@@ -63,15 +63,15 @@ public class EsupOtpCredential implements Credential, Serializable {
 
     @Override
     public String getId() {
-        return this.token.toString();
-    }
-
-
-    public Integer getToken() {
         return this.token;
     }
 
-    public void setToken(final Integer token) {
+
+    public String getToken() {
+        return this.token;
+    }
+
+    public void setToken(final String token) {
         this.token = token;
     }
 

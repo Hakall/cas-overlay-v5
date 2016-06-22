@@ -44,7 +44,7 @@ public class EsupOtpAuthenticationHandler extends AbstractPreAndPostProcessingAu
     @Override
     protected HandlerResult doAuthentication(final Credential credential) throws GeneralSecurityException, PreventedException {
         final EsupOtpCredential esupotpCredential = (EsupOtpCredential) credential;
-        final int otp = esupotpCredential.getToken();
+        final String otp = esupotpCredential.getToken();
         final RequestContext context = RequestContextHolder.getRequestContext();
         final String uid = WebUtils.getAuthentication(context).getPrincipal().getId();    
         //always accept auth for dev
