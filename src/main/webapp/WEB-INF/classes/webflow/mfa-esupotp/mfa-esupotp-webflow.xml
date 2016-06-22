@@ -11,8 +11,17 @@
 
     <action-state id="initializeLoginForm">
         <evaluate expression="initializeLoginAction" />
-        <transition on="success" to="viewLoginFormEsupOtp"/>
+        <transition on="success" to="getTransportsForm"/>
     </action-state>
+
+    <action-state id="getTransportsForm">
+        <evaluate expression="esupotpGetTransportsAction" />
+        <transition on="transports" to="viewTransportEsupOtp"/>
+    </action-state>
+    
+    <view-state id="viewTransportEsupOtp" view="casEsupOtpTransportView">
+        <transition on="submit" to="viewLoginFormEsupOtp"/>
+    </view-state>
 
     <view-state id="viewLoginFormEsupOtp" view="casEsupOtpLoginView" model="credential">
         <binder>
