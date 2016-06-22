@@ -1,4 +1,4 @@
-package org.esupportail.cas.adaptors.esupotp;
+package org.apereo.cas.adaptors.esupotp;
 
 import org.apereo.cas.authentication.Credential;
 import org.apereo.cas.authentication.HandlerResult;

@@ -1,4 +1,4 @@
-package org.esupportail.cas.adaptors.esupotp.web.flow;
+package org.apereo.cas.adaptors.esupotp.web.flow;
 
 import org.apereo.cas.web.flow.resolver.AbstractCasWebflowEventResolver;
 import org.springframework.cloud.context.config.annotation.RefreshScope;

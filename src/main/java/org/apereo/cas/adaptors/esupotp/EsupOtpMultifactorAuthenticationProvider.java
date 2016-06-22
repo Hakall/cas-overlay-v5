@@ -1,6 +1,6 @@
-package org.esupportail.cas.adaptors.esupotp;
+package org.apereo.cas.adaptors.esupotp;
 
-import org.esupportail.cas.adaptors.esupotp.web.flow.EsupOtpMultifactorWebflowConfigurer;
+import org.apereo.cas.adaptors.esupotp.web.flow.EsupOtpMultifactorWebflowConfigurer;
 import org.apereo.cas.authentication.AuthenticationHandler;
 import org.apereo.cas.services.AbstractMultifactorAuthenticationProvider;
 import org.apereo.cas.util.http.HttpClient;

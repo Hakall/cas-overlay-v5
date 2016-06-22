@@ -1,4 +1,4 @@
-package org.esupportail.cas.adaptors.esupotp.web.flow;
+package org.apereo.cas.adaptors.esupotp.web.flow;
 
 import org.apereo.cas.web.flow.AbstractCasWebflowConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.webflow.definition.registry.FlowDefinitionRegistry;
  * @author Alex Bouskine
  * @since 5.0.0
  */
-@Component("yubikeyMultifactorWebflowConfigurer")
+@Component("esupotpMultifactorWebflowConfigurer")
 public class EsupOtpMultifactorWebflowConfigurer extends AbstractCasWebflowConfigurer {
 
     /** Webflow event id. */

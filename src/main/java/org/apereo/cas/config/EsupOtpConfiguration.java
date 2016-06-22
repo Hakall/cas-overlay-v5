@@ -1,4 +1,4 @@
-package org.esupportail.cas.config;
+package org.apereo.cas.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
