@@ -51,20 +51,19 @@ public class EsupOtpGetTransportsAction extends AbstractAction {
         
         requestContext.getFlowScope().put("uid", uid);
         requestContext.getFlowScope().put("userHash", getUserHash(uid));
-        requestContext.getFlowScope().put("usersSecret", usersSecret);
         requestContext.getFlowScope().put("urlApi", urlApi);
-        requestContext.getFlowScope().put("apiPassword", apiPassword);
+        requestContext.getFlowScope().put("userInfos", getUserInfos(uid).toString());
         
         return new EventFactorySupport().event(this, "transports");
     }
     
-    private JSONObject verifyOtp(String uid, String otp) throws IOException {
-		String url = urlApi+"/protected/users/"+uid+"/"+otp+"/"+apiPassword;
+    private JSONObject getUserInfos(String uid) throws IOException, NoSuchAlgorithmException {
+    	String url = urlApi+"/users/"+uid+"/"+getUserHash(uid);
 		URL obj = new URL(url);
 		int responseCode;
 		HttpURLConnection con=null;
 		con = (HttpURLConnection) obj.openConnection();
-		con.setRequestMethod("POST");
+		con.setRequestMethod("GET");
 		responseCode = con.getResponseCode();
 		BufferedReader in = new BufferedReader(
 			new InputStreamReader(con.getInputStream()));

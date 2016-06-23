@@ -10,14 +10,12 @@
     <div class="box fl-panel" id="login">
         <form method="post" id="fm1" class="fm-v clearfix">
         
-            <p th:utext="${uid}"></p>
-            <p th:utext="${userHash}"></p>
-            <p th:utext="${usersSecret}"></p>
-            <p th:utext="${urlApi}"></p>
-            <p th:utext="${apiPassword}"></p>
+            <p id="uid" hidden="true" th:utext="${uid}"></p>
+            <p id="userHash" hidden="true" th:utext="${userHash}"></p>
+            <p id="urlApi" hidden="true" th:utext="${urlApi}"></p>
+            <p id="userInfos" hidden="true" th:utext="${userInfos}"></p>
 
             <div class="row fl-controls-left">
-                <button onclick="submit();">Sms</button>
                 <input type="hidden" name="_eventId" value="submit"/>
                 <input hidden="true" class="btn-submit" name="submit" accesskey="l"
                        th:value="#{screen.welcome.button.register}" tabindex="4" type="submit"/>
