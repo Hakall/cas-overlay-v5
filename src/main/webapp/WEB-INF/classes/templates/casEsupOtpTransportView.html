@@ -15,10 +15,10 @@
             <p id="urlApi" hidden="true" th:utext="${urlApi}"></p>
             <p id="userInfos" hidden="true" th:utext="${userInfos}"></p>
 
-            <div class="row fl-controls-left">
+            <div class="row fl-controls-left" id="list-methods">
                 <input type="hidden" name="_eventId" value="submit"/>
                 <input hidden="true" class="btn-submit" name="submit" accesskey="l"
-                       th:value="#{screen.welcome.button.register}" tabindex="4" type="submit"/>
+                       th:value="#{screen.welcome.button.register}" tabindex="4" type="submit" id="submit" />
             </div>
             <div class="row btn-row">
                 <input type="hidden" name="execution" th:value="${flowExecutionKey}"/>

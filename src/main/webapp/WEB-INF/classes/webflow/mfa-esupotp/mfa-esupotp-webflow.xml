@@ -5,6 +5,7 @@
                           http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
     <var name="credential" class="org.apereo.cas.adaptors.esupotp.EsupOtpCredential" />
+    <var name="transportCredential" class="org.apereo.cas.adaptors.esupotp.EsupOtpTransportCredential" />
     <on-start>
         <evaluate expression="initialFlowSetupAction" />
     </on-start>
@@ -19,9 +20,15 @@
         <transition on="transports" to="viewTransportEsupOtp"/>
     </action-state>
     
-    <view-state id="viewTransportEsupOtp" view="casEsupOtpTransportView">
-        <transition on="submit" to="viewLoginFormEsupOtp"/>
+    <view-state id="viewTransportEsupOtp" view="casEsupOtpTransportView" model="transportCredential">
+        <transition on="submit" to="submitTransportEsupOtp"/>
     </view-state>
+
+    <action-state id="submitTransportEsupOtp">
+        <evaluate expression="esupotpTransportService.sendCode(transportCredential)" />
+        <transition on="success" to="viewLoginFormEsupOtp" />
+        <transition on="error" to="getTransportsForm" />
+    </action-state>
 
     <view-state id="viewLoginFormEsupOtp" view="casEsupOtpLoginView" model="credential">
         <binder>

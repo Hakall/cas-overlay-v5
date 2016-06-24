@@ -46,7 +46,7 @@ public class EsupOtpAuthenticationHandler extends AbstractPreAndPostProcessingAu
         final EsupOtpCredential esupotpCredential = (EsupOtpCredential) credential;
         final String otp = esupotpCredential.getToken();
         final RequestContext context = RequestContextHolder.getRequestContext();
-        final String uid = WebUtils.getAuthentication(context).getPrincipal().getId();    
+        final String uid = WebUtils.getAuthentication(context).getPrincipal().getId();
         //always accept auth for dev
         return createHandlerResult(esupotpCredential,this.principalFactory.createPrincipal(uid), null);
         //throw new FailedLoginException("Failed to authenticate code " + otp);
