@@ -15,7 +15,16 @@
             <p id="urlApi" hidden="true" th:utext="${urlApi}"></p>
             <p id="userInfos" hidden="true" th:utext="${userInfos}"></p>
 
+            <input type="hidden" name="method" value="" id="inputMethod"/>
+            <input type="hidden" name="transport" value="" id="inputTransport"/>
+
             <div class="row fl-controls-left" id="list-methods">
+                <div th:each="method : ${methods}" th:if="${method.getActive() == true and method.getTransports().size() &gt; 0}">
+                    <p th:text="${method.getName()}"></p>
+                    <div th:each="transport : ${method.getTransports()}">
+                        <input  class="button" type="button" th:attr="value=${transport}" th:onclick="|document.getElementById('inputMethod').value='${method.getName()}';document.getElementById('inputTransport').value='${transport}';document.getElementById('submit').click();|"/>
+                    </div>
+                </div>
                 <input type="hidden" name="_eventId" value="submit"/>
                 <input hidden="true" class="btn-submit" name="submit" accesskey="l"
                        th:value="#{screen.welcome.button.register}" tabindex="4" type="submit" id="submit" />

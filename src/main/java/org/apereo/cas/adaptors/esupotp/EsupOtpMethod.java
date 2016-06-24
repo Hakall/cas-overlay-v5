@@ -1,5 +1,6 @@
 package org.apereo.cas.adaptors.esupotp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,8 @@ import org.json.*;
  * @author Alex Bouskine
  * @since 5.0.0
  */
-public class EsupOtpMethod {
+public class EsupOtpMethod implements Serializable{
+	private static final long serialVersionUID = -8908901132111037L;
     
     private String name;
     private Boolean active;
