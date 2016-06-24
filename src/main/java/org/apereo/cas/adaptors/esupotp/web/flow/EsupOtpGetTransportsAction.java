@@ -8,11 +8,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 
 import org.apereo.cas.web.support.WebUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,6 +27,8 @@ import org.springframework.webflow.action.EventFactorySupport;
 import org.springframework.webflow.execution.Event;
 import org.springframework.webflow.execution.RequestContext;
 import org.springframework.webflow.execution.RequestContextHolder;
+
+import org.apereo.cas.adaptors.esupotp.EsupOtpMethod;
 
 /**
  * This is {@link EsupOtpGetTransportsAction}.
@@ -52,7 +57,21 @@ public class EsupOtpGetTransportsAction extends AbstractAction {
         requestContext.getFlowScope().put("uid", uid);
         requestContext.getFlowScope().put("userHash", getUserHash(uid));
         requestContext.getFlowScope().put("urlApi", urlApi);
-        requestContext.getFlowScope().put("userInfos", getUserInfos(uid).toString());
+        
+        JSONObject userInfos = getUserInfos(uid);
+
+        List<EsupOtpMethod> listMethods = new ArrayList<EsupOtpMethod>();
+        try{
+        	JSONObject methods = (JSONObject)((JSONObject)userInfos.get("user")).get("methods");
+            for (Object method : methods.keySet()) {
+    			listMethods.add(new EsupOtpMethod((String)method, (JSONObject)methods.get((String)method)));
+    		}
+        }catch(JSONException e){
+        	System.out.println(e);
+        }
+
+        requestContext.getFlowScope().put("userInfos", userInfos.toString());
+        requestContext.getFlowScope().put("methods", listMethods);
         
         return new EventFactorySupport().event(this, "transports");
     }
