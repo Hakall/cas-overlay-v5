@@ -46,6 +46,9 @@ public class EsupOtpGetTransportsAction extends AbstractAction {
 	@Value("${cas.mfa.esupotp.usersSecret:CAS}")
 	private String usersSecret;
 
+	@Value("${cas.mfa.esupotp.apiPassword:CAS}")
+	private String apiPassword;
+
 	@Override
 	protected Event doExecute(final RequestContext requestContext) throws Exception {
 		final RequestContext context = RequestContextHolder.getRequestContext();
@@ -53,15 +56,15 @@ public class EsupOtpGetTransportsAction extends AbstractAction {
 
 		requestContext.getFlowScope().put("uid", uid);
 		requestContext.getFlowScope().put("userHash", getUserHash(uid));
-
+		
 		JSONObject userInfos = getUserInfos(uid);
-
 		List<EsupOtpMethod> listMethods = new ArrayList<EsupOtpMethod>();
 		try {
 			JSONObject methods = (JSONObject) ((JSONObject) userInfos.get("user")).get("methods");
 			for (Object method : methods.keySet()) {
 				listMethods.add(new EsupOtpMethod((String) method, (JSONObject) methods.get((String) method)));
 			}
+			if(bypass(listMethods))return new EventFactorySupport().event(this, "bypass");
 		} catch (JSONException e) {
 			System.out.println(e);
 		}
@@ -109,5 +112,15 @@ public class EsupOtpGetTransportsAction extends AbstractAction {
 		int hour = calendar.get(Calendar.HOUR_OF_DAY);
 		String salt = uid + day + hour;
 		return salt;
+	}
+	
+	public Boolean bypass(List<EsupOtpMethod> methods) throws JSONException, IOException{
+		Boolean bypass = true;
+		for (EsupOtpMethod method : methods) {
+			if(method.getActive()){
+				bypass = false;
+			}
+		}
+		return bypass;
 	}
 }

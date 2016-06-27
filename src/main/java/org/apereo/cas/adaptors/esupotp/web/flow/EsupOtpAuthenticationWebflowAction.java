@@ -20,10 +20,10 @@ import org.springframework.webflow.execution.RequestContext;
 public class EsupOtpAuthenticationWebflowAction extends AbstractAction {
     @Autowired
     @Qualifier("esupotpAuthenticationWebflowEventResolver")
-    private CasWebflowEventResolver yubikeyAuthenticationWebflowEventResolver;
+    private CasWebflowEventResolver esupotpAuthenticationWebflowEventResolver;
 
     @Override
     protected Event doExecute(final RequestContext requestContext) throws Exception {
-        return this.yubikeyAuthenticationWebflowEventResolver.resolveSingle(requestContext);
+        return this.esupotpAuthenticationWebflowEventResolver.resolveSingle(requestContext);
     }
 }

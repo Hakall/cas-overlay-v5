@@ -18,6 +18,12 @@
     <action-state id="getTransportsForm">
         <evaluate expression="esupotpGetTransportsAction" />
         <transition on="transports" to="viewTransportEsupOtp"/>
+        <transition on="bypass" to="bypassLoginForm"/>
+    </action-state>
+    
+    <action-state id="bypassLoginForm">
+        <evaluate expression="esupotpBypassAuthenticationWebflowAction" />
+		<transition on="success" to="success" />
     </action-state>
     
     <view-state id="viewTransportEsupOtp" view="casEsupOtpTransportView" model="transportCredential">
