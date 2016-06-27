@@ -33,7 +33,7 @@ public class EsupOtpConfiguration {
      */
     @RefreshScope
     @Bean(name = "esupotpFlowRegistry")
-    public FlowDefinitionRegistry yubikeyFlowRegistry() {
+    public FlowDefinitionRegistry esupotpFlowRegistry() {
         final FlowDefinitionRegistryBuilder builder = new FlowDefinitionRegistryBuilder(this.applicationContext, this.builder);
         builder.setBasePath("classpath*:/webflow");
         builder.addFlowLocationPattern("/mfa-esupotp/*-webflow.xml");
