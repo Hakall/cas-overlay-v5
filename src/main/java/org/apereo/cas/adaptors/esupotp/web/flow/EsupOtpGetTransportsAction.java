@@ -65,6 +65,7 @@ public class EsupOtpGetTransportsAction extends AbstractAction {
 				listMethods.add(new EsupOtpMethod((String) method, (JSONObject) methods.get((String) method)));
 			}
 			if(bypass(listMethods))return new EventFactorySupport().event(this, "bypass");
+			if(skipTransports(listMethods))return new EventFactorySupport().event(this, "skip");
 		} catch (JSONException e) {
 			System.out.println(e);
 		}
@@ -112,6 +113,16 @@ public class EsupOtpGetTransportsAction extends AbstractAction {
 		int hour = calendar.get(Calendar.HOUR_OF_DAY);
 		String salt = uid + day + hour;
 		return salt;
+	}
+	
+	public Boolean skipTransports(List<EsupOtpMethod> methods) throws JSONException, IOException{
+		Boolean skip = true;
+		for (EsupOtpMethod method : methods) {
+			if(method.getActive() && method.getTransports().size()>0){
+				skip = false;
+			}
+		}
+		return skip;
 	}
 	
 	public Boolean bypass(List<EsupOtpMethod> methods) throws JSONException, IOException{

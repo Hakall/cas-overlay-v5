@@ -18,7 +18,7 @@ public class EsupOtpCredential implements Credential, Serializable {
 
     private String token;
     
-    private Boolean bypass;
+    private Boolean bypass = false;
 
 	/**
      * Instantiates a new Esup otp token credential.
