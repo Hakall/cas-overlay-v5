@@ -43,9 +43,6 @@ public class EsupOtpGetTransportsAction extends AbstractAction {
 	@Value("${cas.mfa.esupotp.urlApi:CAS}")
 	private String urlApi;
 
-	@Value("${cas.mfa.esupotp.apiPassword:CAS}")
-	private String apiPassword;
-
 	@Value("${cas.mfa.esupotp.usersSecret:CAS}")
 	private String usersSecret;
 

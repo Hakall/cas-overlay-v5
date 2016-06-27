@@ -35,7 +35,7 @@ public class EsupOtpTransportService {
 	public String sendCode(EsupOtpTransportCredential transportCredential) {
 		try {
 			JSONObject response = sendCodeRequest(transportCredential.getUid(), transportCredential.getUserHash(), transportCredential.getTransport(), transportCredential.getMethod());
-			if(((String)response.getString("code")).equals("Ok"))return "success";
+			if(response.getString("code").equals("Ok"))return "success";
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
