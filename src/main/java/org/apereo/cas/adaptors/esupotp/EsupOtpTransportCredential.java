@@ -16,8 +16,10 @@ public class EsupOtpTransportCredential implements Serializable {
     private String method;
     
     private String uid;
+    
+    private String userHash;
 
-    /**
+	/**
      * Instantiates a new Esup otp token credential.
      */
     public EsupOtpTransportCredential() {
@@ -46,4 +48,12 @@ public class EsupOtpTransportCredential implements Serializable {
     public void setMethod(final String method) {
         this.method = method;
     }
+    
+    public String getUserHash() {
+		return userHash;
+	}
+
+	public void setUserHash(final String userHash) {
+		this.userHash = userHash;
+	}
 }

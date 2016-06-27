@@ -35,8 +35,7 @@ public class EsupOtpTransportService {
 	public String sendCode(EsupOtpTransportCredential transportCredential) {
 		
 		try {
-			JSONObject response = sendCodeRequest(transportCredential.getUid(), transportCredential.getTransport(), transportCredential.getMethod());
-			System.out.println(response.toString());
+			JSONObject response = sendCodeRequest(transportCredential.getUid(), transportCredential.getUserHash(), transportCredential.getTransport(), transportCredential.getMethod());
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,8 +47,8 @@ public class EsupOtpTransportService {
 		return "success";
 	}
 
-	private JSONObject sendCodeRequest(String uid, String transport, String method) throws IOException, NoSuchAlgorithmException {
-		String url = urlApi + "/users/" + uid + "/methods/"+ method +"/transports/"+ transport + "/" + EsupOtpGetTransportsAction.getUserHash(uid);
+	private JSONObject sendCodeRequest(String uid, String userHash, String transport, String method) throws IOException, NoSuchAlgorithmException {
+		String url = urlApi + "/users/" + uid + "/methods/"+ method +"/transports/"+ transport + "/" + userHash;
 		URL obj = new URL(url);
 		int responseCode;
 		HttpURLConnection con = null;

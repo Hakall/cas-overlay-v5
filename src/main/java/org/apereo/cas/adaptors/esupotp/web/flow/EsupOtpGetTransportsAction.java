@@ -47,7 +47,7 @@ public class EsupOtpGetTransportsAction extends AbstractAction {
 	private String apiPassword;
 
 	@Value("${cas.mfa.esupotp.usersSecret:CAS}")
-	private static String usersSecret;
+	private String usersSecret;
 
 	@Override
 	protected Event doExecute(final RequestContext requestContext) throws Exception {
@@ -56,7 +56,6 @@ public class EsupOtpGetTransportsAction extends AbstractAction {
 
 		requestContext.getFlowScope().put("uid", uid);
 		requestContext.getFlowScope().put("userHash", getUserHash(uid));
-		requestContext.getFlowScope().put("urlApi", urlApi);
 
 		JSONObject userInfos = getUserInfos(uid);
 
@@ -96,7 +95,7 @@ public class EsupOtpGetTransportsAction extends AbstractAction {
 		return new JSONObject(response.toString());
 	}
 
-	public static String getUserHash(String uid) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	public String getUserHash(String uid) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		MessageDigest md5Md = MessageDigest.getInstance("MD5");
 		String md5 = (new HexBinaryAdapter()).marshal(md5Md.digest(usersSecret.getBytes()));
 		md5 = md5.toLowerCase();
@@ -107,7 +106,7 @@ public class EsupOtpGetTransportsAction extends AbstractAction {
 		return userHash;
 	}
 
-	public static String getSalt(String uid) {
+	public String getSalt(String uid) {
 		Calendar calendar = Calendar.getInstance();
 		int day = calendar.get(Calendar.DAY_OF_MONTH);
 		int hour = calendar.get(Calendar.HOUR_OF_DAY);
