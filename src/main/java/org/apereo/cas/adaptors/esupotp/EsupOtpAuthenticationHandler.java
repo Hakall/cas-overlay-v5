@@ -61,7 +61,8 @@ public class EsupOtpAuthenticationHandler extends AbstractPreAndPostProcessingAu
 		final EsupOtpCredential esupotpCredential = (EsupOtpCredential) credential;
 		final String otp = esupotpCredential.getToken();
 		final RequestContext context = RequestContextHolder.getRequestContext();
-		final String uid = WebUtils.getAuthentication(context).getPrincipal().getId();		
+		final String uid = WebUtils.getAuthentication(context).getPrincipal().getId();
+		if(esupotpCredential.getBypass())return createHandlerResult(esupotpCredential, this.principalFactory.createPrincipal(uid), null);
 		try {
 			JSONObject response = verifyOtp(uid, otp);
 			if(response.getString("code").equals("Ok")){

@@ -17,8 +17,10 @@ public class EsupOtpCredential implements Credential, Serializable {
     private static final long serialVersionUID = -7570600701132111037L;
 
     private String token;
+    
+    private Boolean bypass;
 
-    /**
+	/**
      * Instantiates a new Esup otp token credential.
      */
     public EsupOtpCredential() {
@@ -78,4 +80,16 @@ public class EsupOtpCredential implements Credential, Serializable {
     public boolean isValid() {
         return this.token != null;
     }
+    
+    public Boolean getBypass() {
+		return bypass;
+	}
+
+	public void setBypass(final Boolean bypass) {
+		this.bypass = bypass;
+	}
+	
+	public void activeBypass() {
+		this.bypass = true;
+	}
 }
