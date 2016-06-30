@@ -29,6 +29,7 @@ import org.springframework.webflow.execution.RequestContext;
 import org.springframework.webflow.execution.RequestContextHolder;
 
 import org.apereo.cas.adaptors.esupotp.EsupOtpMethod;
+import org.apereo.cas.adaptors.esupotp.EsupOtpUser;
 
 /**
  * This is {@link EsupOtpGetTransportsAction}.
@@ -53,27 +54,33 @@ public class EsupOtpGetTransportsAction extends AbstractAction {
 	protected Event doExecute(final RequestContext requestContext) throws Exception {
 		final RequestContext context = RequestContextHolder.getRequestContext();
 		final String uid = WebUtils.getAuthentication(context).getPrincipal().getId();
-
+		String userHash = getUserHash(uid);
+		
 		requestContext.getFlowScope().put("uid", uid);
-		requestContext.getFlowScope().put("userHash", getUserHash(uid));
+		requestContext.getFlowScope().put("userHash", userHash);
 		
 		JSONObject userInfos = getUserInfos(uid);
 		List<EsupOtpMethod> listMethods = new ArrayList<EsupOtpMethod>();
+		EsupOtpUser user = new EsupOtpUser(uid, userHash);
+		
 		try {
 			JSONObject methods = (JSONObject) ((JSONObject) userInfos.get("user")).get("methods");
+			JSONObject transports = (JSONObject) ((JSONObject) userInfos.get("user")).get("transports");
 			for (Object method : methods.keySet()) {
 				listMethods.add(new EsupOtpMethod((String) method, (JSONObject) methods.get((String) method)));
 			}
 			//Uncomment for bypass users with no activated methods
 			//if(bypass(listMethods))return new EventFactorySupport().event(this, "bypass");
 			if(skipTransports(listMethods))return new EventFactorySupport().event(this, "skip");
+			user = new EsupOtpUser(uid, userHash, listMethods, transports);
 		} catch (JSONException e) {
 			System.out.println(e);
 		}
 
 		requestContext.getFlowScope().put("userInfos", userInfos.toString());
 		requestContext.getFlowScope().put("methods", listMethods);
-
+		requestContext.getFlowScope().put("user", user);
+		
 		return new EventFactorySupport().event(this, "transports");
 	}
 
