@@ -17,9 +17,9 @@
 
             <div class="row fl-controls-left" id="list-methods">
                 <div th:each="method : ${methods}" th:if="${method.getActive() == true and method.getTransports().size() &gt; 0}">
-                    <p th:text="${method.getName()}"></p>
+                    <div style="background-color: white; text-align: center; border-style: dotted; border-width: 1px; border-color: rgb(29, 113, 184); color: rgb(29, 113, 184);" class="alert" role="alert"> <strong th:text="${method.getName()}"></strong></div>
                     <div th:each="transport : ${method.getTransports()}">
-                        <input  class="button" type="button" th:attr="value=${transport}" th:onclick="|document.getElementById('inputMethod').value='${method.getName()}';document.getElementById('inputTransport').value='${transport}';document.getElementById('submit').click();|"/>
+                        <input  class="btn-submit btn-block" style="background-color: rgb(29, 113, 184);  margin-bottom:15px;" type="button" th:attr="value=${transport}" th:onclick="|document.getElementById('inputMethod').value='${method.getName()}';document.getElementById('inputTransport').value='${transport}';document.getElementById('submit').click();|"/>
                     </div>
                 </div>
                 <input type="hidden" name="_eventId" value="submit"/>
