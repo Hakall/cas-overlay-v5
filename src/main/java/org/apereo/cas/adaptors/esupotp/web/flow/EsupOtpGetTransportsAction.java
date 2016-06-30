@@ -64,7 +64,8 @@ public class EsupOtpGetTransportsAction extends AbstractAction {
 			for (Object method : methods.keySet()) {
 				listMethods.add(new EsupOtpMethod((String) method, (JSONObject) methods.get((String) method)));
 			}
-			if(bypass(listMethods))return new EventFactorySupport().event(this, "bypass");
+			//Uncomment for bypass users with no activated methods
+			//if(bypass(listMethods))return new EventFactorySupport().event(this, "bypass");
 			if(skipTransports(listMethods))return new EventFactorySupport().event(this, "skip");
 		} catch (JSONException e) {
 			System.out.println(e);
