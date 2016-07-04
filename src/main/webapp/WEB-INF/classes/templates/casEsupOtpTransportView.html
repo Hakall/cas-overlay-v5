@@ -4,19 +4,16 @@
 <head th:inline="text">
     <title>[[#{cas.mfa.esupotp.pagetitle}]]</title>
 </head>
-
 <body id="cas">
 <div layout:fragment="content">
     <div class="box fl-panel" id="login">
     	<p th:utext="#{cas.mfa.esupotp.welcome}">
     	</p>
         <form method="post" id="fm1" class="fm-v clearfix">
-			
             <input type="hidden" name="uid" th:attr="value=${user.getUid()}" id="inputUid"/>
             <input type="hidden" name="userHash" th:attr="value=${user.getHash()}" id="inputUserHash"/>
             <input type="hidden" name="method" value="" id="inputMethod"/>
             <input type="hidden" name="transport" value="" id="inputTransport"/>
-
             <div class="row fl-controls-left" id="list-methods">
                 <div th:each="method : ${user.getMethods()}" th:if="${method.getActive() == true and method.getTransports().size() &gt; 0}">
                     <div style="background-color: white; text-align: center; border-style: dotted; border-width: 1px; border-color: rgb(29, 113, 184); color: rgb(29, 113, 184);" class="alert" role="alert">
